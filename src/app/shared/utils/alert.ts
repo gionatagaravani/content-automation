@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { Icon } from "../models/swal";
 
-export function dialog(icon: Icon, title: string) {
+export function showDialog(icon: Icon, title: string) {
     return Swal.fire({
         icon: icon,
         title: title,
@@ -9,7 +9,7 @@ export function dialog(icon: Icon, title: string) {
       });
 }
 
-export function dialogText(icon: Icon, title: string, text: string) {
+export function showDialogText(icon: Icon, title: string, text: string) {
     return Swal.fire({
         icon: icon,
         title: title,
@@ -17,7 +17,7 @@ export function dialogText(icon: Icon, title: string, text: string) {
       });
 }
 
-export function dialogQuestion(icon: Icon, title: string, text: string) {
+export function showDialogQuestion(icon: Icon, title: string, text: string) {
     return Swal.fire({
         icon: icon,
         title: title,
@@ -36,7 +36,7 @@ const Toast = Swal.mixin({
     timerProgressBar: true
   });
 
-export function toast(icon: Icon, title: string, text: string) {
+export function showToast(icon: Icon, title: string) {
     return Toast.fire({
         icon: icon,
         title: title
