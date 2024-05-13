@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (
 ): boolean | Promise<boolean> => {
   const isLogged = inject(AuthService).isLoggedIn;
   if (!isLogged) {
-    return inject(Router).navigate(["/login"]);
+    return inject(Router).navigate(["/sign-in"]);
   }
   return isLogged;
 };
