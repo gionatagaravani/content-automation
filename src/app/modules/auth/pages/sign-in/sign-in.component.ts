@@ -6,7 +6,6 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { showToast } from 'src/app/shared/utils/alert';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,10 +19,6 @@ export class SignInComponent implements OnInit {
   passwordTextType!: boolean;
 
   constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router, private readonly auth: AuthService) {}
-
-  onClick() {
-    console.log('Button clicked');
-  }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({

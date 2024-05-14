@@ -49,6 +49,24 @@ export class AuthService {
     );
   }
 
+  signUp(name: string, surname: string, email: string, password: string): Observable<any> {
+    const body = {
+      name: name,
+      surname: surname,
+      email: email,
+      password: password,
+    };
+    return this.http.post(this.URL + '/register', body).pipe(
+      catchError((err) => {
+        showToast('error', err.error.message);
+        return err.error;
+      }),
+      map((response: any) => {
+        return response;
+      }),
+    );
+  }
+
   signOut(): void {
     showDialogQuestion('warning', 'Are you sure?', 'Where are you going?').then((result) => {
       if (result.isConfirmed) {
