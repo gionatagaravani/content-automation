@@ -56,13 +56,17 @@ export class AuthService {
       email: email,
       password: password,
     };
-    return this.http.post(this.URL + '/register', body).pipe(
+    return this.http.post(this.URL + '/registerlogin', body).pipe(
       catchError((err) => {
         showToast('error', err.error.message);
         return err.error;
       }),
       map((response: any) => {
-        return response;
+        if (response.status === 'ok') {
+          this.UserData = response.data;
+          localStorage.setItem('user', response.token);
+          return response.data;
+        }
       }),
     );
   }

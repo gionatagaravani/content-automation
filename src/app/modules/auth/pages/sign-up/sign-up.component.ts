@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { showToast } from 'src/app/shared/utils/alert';
@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   passwordTextType!: boolean;
 
-  constructor(private readonly _formBuilder: FormBuilder, private readonly auth: AuthService) {}
+  constructor(private readonly _formBuilder: FormBuilder, private readonly auth: AuthService, private readonly router: Router) {}
 
   get f() {
     return this.form.controls;
@@ -53,8 +53,7 @@ export class SignUpComponent implements OnInit {
     }
 
     this.auth.signUp(name, surname, email, password).subscribe((resp) => {
-      console.log('🚀 ~ resp:', resp)
-      
+      showToast('success', `Welcome ${resp?.name ?? 'back'}!`).then(() => this.router.navigate(['/']));
     })
   }
 }
