@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
     }
 
     this.auth.signIn(email, password).subscribe((resp) => {
-      showToast('success', `Welcome ${resp.data?.name ?? 'back'}!`).then(() => this._router.navigate(['/']));
+      showToast('success', `Welcome ${resp?.name ?? 'back'}!`).then(() => this._router.navigate(['/']));
     })
   }
 }

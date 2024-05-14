@@ -18,23 +18,15 @@ export class AuthService {
   ) {}
 
   //get Authenticated user from Local Storage
-  getAuthLocal() {
-    const token = localStorage.getItem('user');
-    const user = JSON.parse(token as string);
-    return user;
-  }
-  //get Authenticated user from Local Storage
   getAuthToken() {
     const token = localStorage.getItem('user');
-    const user = JSON.parse(token as string);
-    return user.token;
+    return token;
   }
 
   //Check wither User Is looged in or not
   get isLoggedIn(): boolean {
     const token = localStorage.getItem('user');
-    const user = JSON.parse(token as string);
-    return user !== null ? true : false;
+    return token ? true : false;
   }
 
   signIn(email: string, password: string): Observable<any> {
@@ -51,6 +43,7 @@ export class AuthService {
         if (response.status === 'ok') {
           this.UserData = response.data;
           localStorage.setItem('user', response.token);
+          return response.data;
         }
       }),
     );
@@ -62,7 +55,7 @@ export class AuthService {
         showDialog('success', 'Goodbye!').then(() => {
           localStorage.removeItem('user');
           this.UserData = undefined;
-          this.router.navigate(['/sign-in']);      
+          this.router.navigate(['/auth/sign-in']);      
         })
       }
     });

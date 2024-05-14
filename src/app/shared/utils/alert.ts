@@ -5,7 +5,8 @@ export function showDialog(icon: Icon, title: string) {
     return Swal.fire({
         icon: icon,
         title: title,
-        showConfirmButton: false
+        showConfirmButton: false,
+        timer: 1500
       });
 }
 
@@ -13,7 +14,8 @@ export function showDialogText(icon: Icon, title: string, text: string) {
     return Swal.fire({
         icon: icon,
         title: title,
-        showConfirmButton: false
+        showConfirmButton: false,
+        timer: 1500
       });
 }
 
@@ -32,7 +34,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 2000,
+    timer: 1500,
     timerProgressBar: true
   });
 
