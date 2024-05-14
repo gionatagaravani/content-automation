@@ -1,14 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, catchError, map } from 'rxjs';
+import { showToast } from 'src/app/shared/utils/alert';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   UserData: any;
+  readonly URL = environment.backendUrl + '/auth';
 
-  constructor(private readonly router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly http: HttpClient
+  ) {}
 
   //get Authenticated user from Local Storage
   getAuthLocal() {
@@ -28,5 +35,24 @@ export class AuthService {
     const token = localStorage.getItem('user');
     const user = JSON.parse(token as string);
     return user !== null ? true : false;
+  }
+
+  signIn(email: string, password: string): Observable<any> {
+    const body = {
+      email: email,
+      password: password,
+    };
+    return this.http.post(this.URL + '/login', body).pipe(
+      catchError((err) => {
+        showToast('error', err.error.message);
+        return err.error;
+      }),
+      map((response: any) => {
+        if (response.status === 'ok') {
+          this.UserData = response.data;
+          localStorage.setItem('user', response.token);
+        }
+      }),
+    );
   }
 }
