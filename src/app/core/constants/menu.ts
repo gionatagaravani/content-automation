@@ -12,7 +12,7 @@ export class Menu {
           route: '/dashboard',
           children: [
             { label: 'Nfts', route: '/dashboard/nfts' },
-            // { label: 'Podcast', route: '/dashboard/podcast' },
+            { label: 'Podcast', route: '/dashboard/podcast' },
           ],
         },
         {

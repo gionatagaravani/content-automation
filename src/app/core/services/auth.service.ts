@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, map } from 'rxjs';
-import { showToast } from 'src/app/shared/utils/alert';
+import { showDialog, showDialogQuestion, showToast } from 'src/app/shared/utils/alert';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -54,5 +54,17 @@ export class AuthService {
         }
       }),
     );
+  }
+
+  signOut(): void {
+    showDialogQuestion('warning', 'Are you sure?', 'Where are you going?').then((result) => {
+      if (result.isConfirmed) {
+        showDialog('success', 'Goodbye!').then(() => {
+          localStorage.removeItem('user');
+          this.UserData = undefined;
+          this.router.navigate(['/sign-in']);      
+        })
+      }
+    });
   }
 }
