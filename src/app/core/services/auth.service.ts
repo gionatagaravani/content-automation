@@ -15,18 +15,24 @@ export class AuthService {
   constructor(
     private readonly router: Router,
     private readonly http: HttpClient
-  ) {}
+  ) {
+    if (this.isLoggedIn) {
+      this.UserData = this.getAuthLocal();
+    }
+  }
 
   //get Authenticated user from Local Storage
-  getAuthToken() {
+  getAuthLocal() {
     const token = localStorage.getItem('user');
-    return token;
+    const user = JSON.parse(token as string);
+    return user;
   }
 
   //Check wither User Is looged in or not
   get isLoggedIn(): boolean {
     const token = localStorage.getItem('user');
-    return token ? true : false;
+    const user = JSON.parse(token as string);
+    return user !== null ? true : false;
   }
 
   signIn(email: string, password: string): Observable<any> {
@@ -42,7 +48,7 @@ export class AuthService {
       map((response: any) => {
         if (response.status === 'ok') {
           this.UserData = response.data;
-          localStorage.setItem('user', response.token);
+          localStorage.setItem('user', JSON.stringify(this.UserData));
           return response.data;
         }
       }),
@@ -64,7 +70,7 @@ export class AuthService {
       map((response: any) => {
         if (response.status === 'ok') {
           this.UserData = response.data;
-          localStorage.setItem('user', response.token);
+          localStorage.setItem('user', JSON.stringify(this.UserData));
           return response.data;
         }
       }),

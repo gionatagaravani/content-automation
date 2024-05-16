@@ -43,6 +43,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   ],
 })
 export class ProfileMenuComponent implements OnInit {
+  userdata: any;
   public isOpen = false;
   public profileMenu = [
     {
@@ -93,9 +94,13 @@ export class ProfileMenuComponent implements OnInit {
   constructor(
     public themeService: ThemeService,
     private readonly auth: AuthService
-  ) {}
+  ) {
+    
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userdata = this.auth.UserData;
+  }
 
   public toggleMenu(): void {
     this.isOpen = !this.isOpen;
