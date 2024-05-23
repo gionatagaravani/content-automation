@@ -12,6 +12,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { showToast } from 'src/app/shared/utils/alert';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -50,30 +51,17 @@ export class SignInComponent implements AfterViewInit, OnInit {
     this.initializeGoogle();
   }
 
-  private initializeGoogle(): void {
-    // @ts-ignore
-    google.accounts.id.initialize({
-      client_id: '896279344467-mrafisrb8ata8noglhtcvj6nfcu5tbmh.apps.googleusercontent.com',
-      callback: this.handleCredentialResponse.bind(this),
-      auto_select: false,
-      cancel_on_tap_outside: true,
-    });
-    // @ts-ignore
-    google.accounts.id.renderButton(
-      // @ts-ignore
-      document.getElementById('google-button'),
-      { theme: 'outline', size: 'large', width: '400px', display: 'flex' }
-    );
-    // @ts-ignore
-    google.accounts.id.prompt((notification: PromptMomentNotification) => console.log);
-  }
-
   async handleCredentialResponse(response: any) {
     // Here will be your response from Google.
     if (response.credential) {
-      console.log('🚀 ~ googleUser.credential:', response.credential)
-      fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${response.credential}`).then((res) => console.log(res))
-    }  }
+      this.auth.loginWithGoogle(response.credential).subscribe((resp) => {
+        console.log('🚀 ~ resp:', resp)
+        showToast('success', `Welcome ${resp?.name ?? 'back'}!`).then(() =>
+          this._router.navigate(['/'])
+        );
+      });
+    }
+  }
 
   get f() {
     return this.form.controls;
@@ -97,5 +85,20 @@ export class SignInComponent implements AfterViewInit, OnInit {
         this._router.navigate(['/'])
       );
     });
+  }
+
+  private initializeGoogle(): void {
+    // @ts-ignore
+    google.accounts.id.initialize({
+      client_id: environment.googleClientID,
+      callback: this.handleCredentialResponse.bind(this),
+      auto_select: false,
+      cancel_on_tap_outside: true,
+    });
+    // @ts-ignore
+    google.accounts.id.renderButton(
+      document.getElementById('google-button'),
+      { theme: 'outline', size: 'large', width: '400px', display: 'flex' }
+    );
   }
 }

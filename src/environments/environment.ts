@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:3000'
+  backendUrl: 'http://localhost:3000',
+  googleClientID: '896279344467-mrafisrb8ata8noglhtcvj6nfcu5tbmh.apps.googleusercontent.com'
 };
 
 /*

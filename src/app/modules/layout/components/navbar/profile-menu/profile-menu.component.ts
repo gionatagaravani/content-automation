@@ -44,6 +44,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class ProfileMenuComponent implements OnInit {
   userdata: any;
+  img: any;
   public isOpen = false;
   public profileMenu = [
     {
@@ -94,12 +95,11 @@ export class ProfileMenuComponent implements OnInit {
   constructor(
     public themeService: ThemeService,
     private readonly auth: AuthService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.userdata = this.auth.UserData;
+    this.img = this.userdata.image ?? 'https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg';
   }
 
   public toggleMenu(): void {

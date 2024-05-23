@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   UserData: any;
   readonly URL = environment.backendUrl + '/auth';
+  readonly GOOGLE_URL = environment.backendUrl + '/google';
 
   constructor(
     private readonly router: Router,
@@ -87,5 +88,21 @@ export class AuthService {
         })
       }
     });
+  }
+
+  loginWithGoogle(token: string): Observable<any> {
+    return this.http.post(this.GOOGLE_URL + '/login', { token: token }).pipe(
+      catchError((err) => {
+        showToast('error', err.error.message);
+        return err.error;
+      }),
+      map((response: any) => {
+        if (response.status === 'ok') {
+          this.UserData = response.data;
+          localStorage.setItem('user', JSON.stringify(this.UserData));
+          return response.data;
+        }
+      }),
+    );
   }
 }

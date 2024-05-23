@@ -6,7 +6,7 @@
       clickOutside
       (clickOutside)="isOpen = false"
       class="h-9 w-9 rounded-md"
-      src="https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg"
+      [src]="img"
       alt="" />
   </button>
   <!-- Dropdown -->
@@ -15,7 +15,7 @@
     class="absolute right-0 z-20 mt-2 w-60 origin-top-right transform rounded-md bg-background py-4 shadow-custom ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
     <div class="flext-row flex items-center px-4 pb-4">
       <div class="w-10 shrink-0">
-        <img class="rounded-md" src="https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg" alt="" />
+        <img class="rounded-md" [src]="img" alt="" />
       </div>
       <div class="overflow-hidden px-2 text-sm font-semibold text-foreground">
         {{ userdata.name }} {{ userdata.surname }}
