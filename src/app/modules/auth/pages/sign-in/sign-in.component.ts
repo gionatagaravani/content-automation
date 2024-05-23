@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -28,7 +28,7 @@ import { showToast } from 'src/app/shared/utils/alert';
     ButtonComponent,
   ],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements AfterViewInit, OnInit {
   form!: FormGroup;
   submitted = false;
   passwordTextType!: boolean;
@@ -44,7 +44,13 @@ export class SignInComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
 
+  ngAfterViewInit(): void {
+    this.initializeGoogle();
+  }
+
+  private initializeGoogle(): void {
     // @ts-ignore
     google.accounts.id.initialize({
       client_id: '896279344467-mrafisrb8ata8noglhtcvj6nfcu5tbmh.apps.googleusercontent.com',
