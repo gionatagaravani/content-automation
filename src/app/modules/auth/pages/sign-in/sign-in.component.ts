@@ -55,7 +55,6 @@ export class SignInComponent implements AfterViewInit, OnInit {
     // Here will be your response from Google.
     if (response.credential) {
       this.auth.loginWithGoogle(response.credential).subscribe((resp) => {
-        console.log('🚀 ~ resp:', resp)
         showToast('success', `Welcome ${resp?.name ?? 'back'}!`).then(() =>
           this._router.navigate(['/'])
         );

@@ -14,6 +14,16 @@ export class Menu {
             { label: 'Nfts', route: '/dashboard/nfts' },
             { label: 'Podcast', route: '/dashboard/podcast' },
           ],
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/play.svg',
+          label: 'Automations',
+          route: '/automations'
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/link.svg',
+          label: 'Connections',
+          route: '/connections'
         }
       ],
     }
