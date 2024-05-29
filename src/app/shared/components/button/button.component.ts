@@ -4,7 +4,7 @@ import { cx } from '../../utils/ckassnames';
 
 type ButtonProps = {
   impact: 'bold' | 'light' | 'none';
-  size: 'small' | 'medium' | 'large';
+  size: 'small' | 'small_md' | 'medium' | 'large';
   shape: 'square' | 'rounded' | 'pill';
   tone: 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'light';
   shadow: 'none' | 'small' | 'medium' | 'large';
@@ -69,6 +69,7 @@ export class ButtonComponent implements OnInit {
 
   sizeClasses: Record<ButtonProps['size'], string> = {
     small: 'px-3 py-1 text-xs',
+    small_md: 'px-3 py-2 text-xs',
     medium: 'px-5 py-2 text-sm',
     large: 'px-7 py-2.5 text-lg',
   };

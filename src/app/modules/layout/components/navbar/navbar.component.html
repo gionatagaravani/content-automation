@@ -40,10 +40,22 @@
 
       <!-- Profile menu -->
       <div class="items-center justify-end sm:order-4 md:flex md:flex-1 lg:w-0">
-        <!-- <div class="hidden text-end md:flex">
-          <button>Credits: </button>
-        </div> -->
-        <div class="text-end"><app-navbar-menu></app-navbar-menu></div>
+        <div class="hidden text-end md:flex">
+          <app-button
+            full
+            impact="bold"
+            tone="primary"
+            shape="rounded"
+            size="small_md"
+          >
+            <svg-icon
+              src="assets/icons/heroicons/outline/bolt.svg"
+              [svgClass]="'h-4 w-4'"
+            ></svg-icon>
+            &nbsp;
+            Upgrade</app-button
+          >
+        </div>
         <app-profile-menu></app-profile-menu>
       </div>
     </div>
